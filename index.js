@@ -34,19 +34,11 @@ nextButton.addEventListener("click", () => {
 
 searchBar.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData);
-
-  searchQuery = data.query;
+  searchQuery = event.target.elements.query.value.toLowerCase();
   page = 1;
-
+  cardContainer.innerHTML = "";
   fetchCharacters();
 });
-
-
-
-
 
 async function fetchCharacters() {
   try {
