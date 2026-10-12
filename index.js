@@ -64,4 +64,17 @@ async function fetchCharacters() {
     console.error("Error fetching characters:", error);
   }
 }
+
+searchBar.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData);
+
+  searchQuery = data.query;
+  page = 1;
+
+  fetchCharacters();
+});
+
 fetchCharacters();
