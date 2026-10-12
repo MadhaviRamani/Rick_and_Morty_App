@@ -2,9 +2,7 @@
 import { createCharacterCard } from "./charactercard.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
-const card = createCharacterCard();
 
-cardContainer.append(card);
 
 /* <------------ searchBarContainer -------------> */
 const searchBarContainer = document.querySelector(
@@ -17,15 +15,26 @@ const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
-const maxPage = 1;
-const page = 1;
+let maxPage = 1;
+let  page = 1;
 const searchQuery = "";
 
 async function fetchCharacters() {
   try {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const response = await fetch("https://rickandmortyapi.com/api/character = ${page}");
     const data = await response.json();
-    console.log("Tüm API verisi:", data);
+
+    maxPage = data.info.pages;
+    cardContainer.innerHTML = "";
+      data.results.forEach((character) => {
+     const card = createCharacterCard(character);
+     cardContainer.append(card);
+    });
+
+    pagination.textContent = `Page ${page} of ${maxPage} `;
+   
+
+   /*  console.log("Tüm API verisi:", data);
 
     // forEach döngüsü
     data.results.forEach((character) => {
@@ -33,11 +42,11 @@ async function fetchCharacters() {
       console.log(character.status);
       console.log(character.type);
       console.log(character.image);
-    });
+    }); */
 
     // map işlemi
-    const names = data.results.map((character) => character.name);
-    console.log("İsimler Dizisi:", names);
+   /*  const names = data.results.map((character) => character.name);
+    console.log("İsimler Dizisi:", names); */
   } catch (error) {
     console.error("Error fetching characters:", error);
   }
