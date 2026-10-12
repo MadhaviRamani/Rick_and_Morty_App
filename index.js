@@ -13,9 +13,10 @@ const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
+// States
 let maxPage = 1;
 let page = 1;
-const searchQuery = "";
+let searchQuery = "";
 /* <---------------- Pagination ----------------> */
 
 prevButton.addEventListener("click", () => {
@@ -29,6 +30,14 @@ nextButton.addEventListener("click", () => {
     page++;
     fetchCharacters();
   }
+});
+
+searchBar.addEventListener("submit", (event) => {
+  event.preventDefault();
+  searchQuery = event.target.elements.query.value.toLowerCase();
+  page = 1;
+  cardContainer.innerHTML = "";
+  fetchCharacters();
 });
 
 async function fetchCharacters() {
@@ -55,18 +64,4 @@ async function fetchCharacters() {
     console.error("Error fetching characters:", error);
   }
 }
-
-searchBar.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData);
-
-  searchQuery = data.query;
-  page = 1;
-
-  fetchCharacters();
-});
-
 fetchCharacters();
-
