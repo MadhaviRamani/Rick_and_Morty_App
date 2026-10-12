@@ -15,7 +15,21 @@ const pagination = document.querySelector('[data-js="pagination"]');
 
 let maxPage = 1;
 let page = 1;
-let searchQuery = "";
+const searchQuery = "";
+/* <---------------- Pagination ----------------> */
+
+prevButton.addEventListener("click", () => {
+  if (page > 1) {
+    page--;
+    fetchCharacters();
+  }
+});
+nextButton.addEventListener("click", () => {
+  if (page < maxPage) {
+    page++;
+    fetchCharacters();
+  }
+});
 
 async function fetchCharacters() {
   try {
@@ -35,9 +49,10 @@ async function fetchCharacters() {
     });
 
     pagination.textContent = `${page} / ${maxPage} `;
+    prevButton.disabled = page === 1;
+    nextButton.disabled = page === maxPage;
   } catch (error) {
     console.error("Error fetching characters:", error);
-    cardContainer.innerHTML = "<p>No characters found.</p>";
   }
 }
 
@@ -54,17 +69,4 @@ searchBar.addEventListener("submit", (event) => {
 });
 
 fetchCharacters();
-/* <---------------- Pagination ----------------> */
 
-prevButton.addEventListener("click", () => {
-  if (page > 1) {
-    page--;
-    fetchCharacters();
-  }
-});
-nextButton.addEventListener("click", () => {
-  if (page < maxPage) {
-    page++;
-    fetchCharacters();
-  }
-});
