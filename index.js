@@ -1,4 +1,12 @@
+/* <------------ createCharacterCard -------------> */
+import { createCharacterCard } from "./charactercard.js";
+
 const cardContainer = document.querySelector('[data-js="card-container"]');
+const card = createCharacterCard();
+
+cardContainer.append(card);
+
+/* <------------ searchBarContainer -------------> */
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]',
 );
