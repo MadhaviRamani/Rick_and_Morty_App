@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
-  '[data-js="search-bar-container"]'
+  '[data-js="search-bar-container"]',
 );
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
@@ -12,3 +12,27 @@ const pagination = document.querySelector('[data-js="pagination"]');
 const maxPage = 1;
 const page = 1;
 const searchQuery = "";
+
+async function fetchCharacters() {
+  try {
+    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const data = await response.json();
+    console.log("Tüm API verisi:", data);
+
+    // forEach döngüsü
+    data.results.forEach((character) => {
+      console.log(character.name);
+      console.log(character.status);
+      console.log(character.type);
+      console.log(character.image);
+    });
+
+    // map işlemi
+    const names = data.results.map((character) => character.name);
+    console.log("İsimler Dizisi:", names);
+  } catch (error) {
+    console.error("Error fetching characters:", error);
+  }
+}
+
+fetchCharacters();
