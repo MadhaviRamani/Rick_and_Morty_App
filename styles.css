@@ -10,8 +10,8 @@
 }
 
 :root {
-  --color-primary: rgb(51, 51, 51);
-  --color-secondary: #f6f6f6;
+  --color-primary: rgb(7, 1, 1);
+  --color-secondary: #edd1d1;
   --font-family: system-ui;
 }
 
@@ -22,6 +22,7 @@ body {
 }
 
 main {
+  background-color: rgb(224, 149, 194);
   display: flex;
   flex-direction: column;
   gap: 10px;
