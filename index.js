@@ -56,9 +56,12 @@ async function fetchCharacters() {
       const card = createCharacterCard(character);
       cardContainer.append(card);
     });
+
+    pagination.textContent = `${page} / ${maxPage} `;
+    prevButton.disabled = page === 1;
+    nextButton.disabled = page === maxPage;
   } catch (error) {
     console.error("Error fetching characters:", error);
-    cardContainer.innerHTML = "<p>No characters found.</p>";
   }
 }
 fetchCharacters();
