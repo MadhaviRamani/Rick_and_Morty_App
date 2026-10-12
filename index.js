@@ -1,12 +1,6 @@
-/* <------------ createCharacterCard -------------> */
 import { createCharacterCard } from "./charactercard.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
-const card = createCharacterCard();
-
-cardContainer.append(card);
-
-/* <------------ searchBarContainer -------------> */
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]',
 );
@@ -16,31 +10,42 @@ const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
-// States
-const maxPage = 1;
-const page = 1;
-const searchQuery = "";
+let maxPage = 1;
+let page = 1;
+let searchQuery = "";
 
 async function fetchCharacters() {
   try {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character?page=${page}&name=${searchQuery}`,
+    );
     const data = await response.json();
-    console.log("Tüm API verisi:", data);
 
-    // forEach döngüsü
+    cardContainer.innerHTML = "";
+
+    maxPage = data.info.pages;
+    pagination.textContent = `${page} / ${maxPage}`;
+
     data.results.forEach((character) => {
-      console.log(character.name);
-      console.log(character.status);
-      console.log(character.type);
-      console.log(character.image);
+      const card = createCharacterCard(character);
+      cardContainer.append(card);
     });
-
-    // map işlemi
-    const names = data.results.map((character) => character.name);
-    console.log("İsimler Dizisi:", names);
   } catch (error) {
     console.error("Error fetching characters:", error);
+    cardContainer.innerHTML = "<p>No characters found.</p>";
   }
 }
+
+searchBar.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData);
+
+  searchQuery = data.query;
+  page = 1;
+
+  fetchCharacters();
+});
 
 fetchCharacters();
