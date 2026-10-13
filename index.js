@@ -61,20 +61,11 @@ async function fetchCharacters() {
     prevButton.disabled = page === 1;
     nextButton.disabled = page === maxPage;
   } catch (error) {
-    console.error("Error fetching characters:", error);
+    console.log("no more card:", error.message);
+    cardContainer.innerHTML = `<p> we do not have more card </p>`;
+    pagination.textContent = " 0 / 0 ";
+    nextButton.disabled = true;
   }
 }
-
-searchBar.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData);
-
-  searchQuery = data.query;
-  page = 1;
-
-  fetchCharacters();
-});
 
 fetchCharacters();

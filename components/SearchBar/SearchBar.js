@@ -1,9 +1,23 @@
-searchBar.addEventListener("submit", (event) => {
-  event.preventDefault();
+export function searchBar() {
+  const formElement = document.createElement("form");
+  formElement.setAttribute("data-js", "search-bar");
+  formElement.classList.add("search-bar");
 
-  const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData);
+  const inputElement = document.createElement("input");
+  inputElement.setAttribute("name", "query");
+  inputElement.setAttribute("class", "search-bar__input");
+  inputElement.setAttribute("type", "text");
+  inputElement.setAttribute("placeholder", "Search characters");
+  inputElement.setAttribute("aria-label", " characters name");
 
-  searchQuery = data.query;
-  page = 1;
-});
+  const buttonElement = document.createElement("button");
+  buttonElement.classList.add("search-bar__button");
+  buttonElement.setAttribute("aria-label", "search for character");
+
+  const imgElement = document.createElement("img");
+  imgElement.setAttribute("src", "assets/magnifying-glass.png");
+  imgElement.classList.add("search-bar__icon");
+
+  
+
+}
