@@ -58,9 +58,7 @@ async function fetchCharacters() {
       cardContainer.append(card);
     });
 
-    pagination.textContent = `${page} / ${maxPage} `;
-    prevButton.disabled = page === 1;
-    nextButton.disabled = page === maxPage;
+   
 
   } catch (error) {
     console.log("no more card:", error.message);
