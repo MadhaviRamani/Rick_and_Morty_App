@@ -3,6 +3,7 @@
 @import "components/NavButton/NavButton.css";
 @import "components/NavPagination/NavPagination.css";
 
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,24 +11,39 @@
 }
 
 :root {
-  --color-primary: rgb(7, 1, 1);
-  --color-secondary: #edd1d1;
-  --font-family: system-ui;
+  --color-primary: #191321;
+  --color-secondary: #f9e5ed;
+  --color-accent: #e88bb8;
+  --color-accent-dark: #c94f8b;
+  --font-family: system-ui, sans-serif;
 }
 
 body {
   font-family: var(--font-family);
   color: var(--color-primary);
-  padding: 20px;
+  padding: 32px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e99bc1, #d978aa);
 }
 
+/* Main page */
 main {
-  background-color: rgb(224, 149, 194);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
 }
 
+/* Page title */
 .title {
-  padding: 10px 0;
+  padding: 10px 0 20px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  text-align: center;
 }
+
