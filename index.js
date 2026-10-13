@@ -1,6 +1,7 @@
 /* <------------ createCharacterCard -------------> */
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 
+
 const cardContainer = document.querySelector('[data-js="card-container"]');
 
 /* <------------ searchBarContainer -------------> */
@@ -60,6 +61,7 @@ async function fetchCharacters() {
     pagination.textContent = `${page} / ${maxPage} `;
     prevButton.disabled = page === 1;
     nextButton.disabled = page === maxPage;
+
   } catch (error) {
     console.log("no more card:", error.message);
     cardContainer.innerHTML = `<p> we do not have more card </p>`;
@@ -69,3 +71,4 @@ async function fetchCharacters() {
 }
 
 fetchCharacters();
+createSearchBar();
