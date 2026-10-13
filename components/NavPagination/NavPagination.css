@@ -2,14 +2,17 @@
 
 .navigation {
   min-height: 48px;
+  width: 95%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.55);
+  
   border-radius: 14px;
+  position: fixed;
+  bottom: 0;
 }
 
 .navigation__pagination {
